@@ -14,11 +14,15 @@ def create_driver(request):
     url = request.config.getoption('--url')
     driver = None
     if choose_browser == 'chrome':
-        driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.headless = True
+        driver = webdriver.Chrome(chrome_options=options)
 
     elif choose_browser == 'firefox':
+        options = webdriver.FirefoxOptions()
+        options.headless = True
         driver = webdriver.Firefox(firefox_binary='/home/vladimir/firefox/firefox',
-                                   executable_path='/usr/local/bin/geckodriver')
+                                   executable_path='/usr/local/bin/geckodriver', firefox_options=options)
     elif choose_browser == 'ie':
         raise WebDriverException('Это Linux система! Используйте chrome или firefox.')
     else:
@@ -27,3 +31,4 @@ def create_driver(request):
     request.addfinalizer(driver.quit)
     return {'driver': driver,
             'url': url}
+
