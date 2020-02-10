@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.options import Options
 
 
 def pytest_addoption(parser):
@@ -14,10 +15,10 @@ def create_driver(request):
     url = request.config.getoption('--url')
     driver = None
     if choose_browser == 'chrome':
-        options = webdriver.ChromeOptions()
-        options.add_argument('-headless')
+        options = Options()
+        options.add_argument("--headless")
         driver = webdriver.Chrome(options=options)
-
+        
     elif choose_browser == 'firefox':
         options = webdriver.FirefoxOptions()
         options.headless = True
