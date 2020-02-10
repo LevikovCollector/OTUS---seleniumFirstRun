@@ -15,14 +15,14 @@ def create_driver(request):
     driver = None
     if choose_browser == 'chrome':
         options = webdriver.ChromeOptions()
-        options.headless = True
-        driver = webdriver.Chrome(chrome_options=options)
+        options.add_argument('-headless')
+        driver = webdriver.Chrome(options=options)
 
     elif choose_browser == 'firefox':
         options = webdriver.FirefoxOptions()
         options.headless = True
         driver = webdriver.Firefox(firefox_binary='/home/vladimir/firefox/firefox',
-                                   executable_path='/usr/local/bin/geckodriver', firefox_options=options)
+                                   executable_path='/usr/local/bin/geckodriver', options=options)
     elif choose_browser == 'ie':
         raise WebDriverException('Это Linux система! Используйте chrome или firefox.')
     else:
