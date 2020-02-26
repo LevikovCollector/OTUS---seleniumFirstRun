@@ -7,4 +7,10 @@ class AdminProductPage():
     EDIT_PRODUCT = (By.CSS_SELECTOR, "div.table-responsive tbody >tr:nth-child(3)>td:last-child>a")
     ALL_TABLE_LINES = (By.CSS_SELECTOR, "div.table-responsive tbody >tr")
     PAGINATIONS = (By.CSS_SELECTOR, "ul.pagination")
-    LAST_PAGINATION_PAGE = (By.CSS_SELECTOR, "li:last-child>a")
+    LAST_PAGINATION_PAGE = (By.CSS_SELECTOR, "ul.pagination>li:last-child>a")
+    COLUMN_PRODUCT_NAME = (By.CSS_SELECTOR, "td:nth-child(3)")
+    COLUMN_MODEL = (By.CSS_SELECTOR, "td:nth-child(4)")
+    COLUMN_PRICE = (By.CSS_SELECTOR, "td:nth-child(5)")
+    COLUMN_WITH_CHECKBOX = (By.CSS_SELECTOR, "td:nth-child(1)")
+
+

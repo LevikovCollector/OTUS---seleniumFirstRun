@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 
+
 @pytest.fixture(scope='session')
 def browser(request):
     driver = webdriver.Chrome()
