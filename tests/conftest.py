@@ -18,7 +18,7 @@ def create_driver(request):
         options = Options()
         options.add_argument("--headless")
         driver = webdriver.Chrome(options=options)
-        
+
     elif choose_browser == 'firefox':
         options = webdriver.FirefoxOptions()
         options.headless = True
