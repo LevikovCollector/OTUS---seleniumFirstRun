@@ -1,5 +1,5 @@
 from page_object.locators import MainPage, AdminAuthPage, CategoryPage, SearchResultPage, ProductPage, \
-    AdminMainPageLocators
+    AdminMainPageLocators, AdminProductPage
 from page_object.pages_obj.AdminProductPage import AdminProduct
 from page_object.pages_obj.AuthPage import AuthUser
 from page_object.pages_obj.BaseClass import BasePage
@@ -80,7 +80,15 @@ def test_add_product(browser):
     admin_product_page.product_cart('new')
     admin_product_page.verify_product_in_table()
 
-
+def test_add_product_with_img(browser):
+    '''Проверяем добавление нового продукта в каталог с изображением'''
+    admin_product_page = AdminProduct(browser)
+    admin_product_page.open_url('/admin')
+    admin_product_page.admin_auth()
+    admin_product_page.close_warning_message()
+    admin_product_page.click_element(AdminMainPageLocators.CATALOG_GROUP)
+    admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
+    admin_product_page.product_cart_with_img()
 def test_edit_product(browser):
     '''Проверяем редактирование продукта'''
     admin_product_page = AdminProduct(browser)

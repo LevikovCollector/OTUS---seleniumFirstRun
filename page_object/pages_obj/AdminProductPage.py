@@ -1,3 +1,4 @@
+import os
 import random
 
 from faker import Faker
@@ -50,6 +51,17 @@ class AdminProduct(AdminMainPage):
         else:
             self.verify_delete_product()
 
+    def product_cart_with_img(self):
+        self.product = NewProduct()
+        self.product_url = self.driver.current_url
+        if self.find_element(AdminProductCart.PRODUCT_FORM):
+            self.fill_product_cart()
+            self.upload_img_to_cart()
+            self.click_element(AdminProductCart.SAVE_PRODUCT_BUTTON)
+            self.open_url(self.product_url)
+        else:
+            raise NoSuchElementException('Не найден элемент по локатору: ' + AdminProductCart.PRODUCT_FORM)
+
     def check_table_line_by_text(self):
         self.first_page = True
         checkbox = self.find_product_in_table()
@@ -85,6 +97,16 @@ class AdminProduct(AdminMainPage):
         self.click_element(AdminProductCart.DATA_TAB)
         self.fill_form(AdminProductCart.PRODUCT_PRICE, self.product.product_price)
         self.fill_form(AdminProductCart.PRODUCT_MODEL, self.product.model)
+
+    def upload_img_to_cart(self):
+        dirname = os.path.dirname(__file__)
+        filename = os.path.join(dirname, 'img/img1.jpg')
+        self.click_element(AdminProductCart.IMG_TAB)
+        self.click_element(AdminProductCart.DEFAULT_IMG)
+        self.click_element(AdminProductCart.OPEN_IMG_MANAGER)
+
+        self.driver.execute_script("document.getElementById('input-image').setAttribute('type','show')")
+        self.fill_form(AdminProductCart.IMG_INPUT, filename)
 
     def verify_pagination(self):
         return self.find_element(AdminProductPage.PAGINATIONS)
