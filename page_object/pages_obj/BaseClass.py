@@ -1,3 +1,5 @@
+import logging
+
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -54,3 +56,13 @@ class BasePage:
     def verify_url(self, url_for_check):
         url = self.driver.current_url
         assert url.find(url_for_check) >= 0
+
+    def check_browser_log(self):
+        if self.driver.name != 'firefox':
+            logger = logging.getLogger('browser_log')
+            logger.info('Логи браузера - начало')
+            br_log = self.driver.get_log('browser')
+            if br_log is not []:
+                for line in br_log:
+                    logger.info(line)
+            logger.info('Логи браузера - конец')

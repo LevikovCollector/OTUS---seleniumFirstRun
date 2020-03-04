@@ -1,5 +1,5 @@
 from page_object.locators import MainPage, AdminAuthPage, CategoryPage, SearchResultPage, ProductPage, \
-    AdminMainPageLocators, AdminProductPage
+    AdminMainPageLocators
 from page_object.pages_obj.AdminProductPage import AdminProduct
 from page_object.pages_obj.AuthPage import AuthUser
 from page_object.pages_obj.BaseClass import BasePage
@@ -18,6 +18,7 @@ def test_main_page(browser):
     main_page.verify_element(MainPage.SEARCH_FIELD)
     main_page.verify_element(MainPage.SHOPPING_CART_LINK)
     main_page.verify_element(MainPage.TOP_NAVIGATION)
+    main_page.check_browser_log()
 
 
 def test_admin_page(browser):
@@ -29,6 +30,7 @@ def test_admin_page(browser):
     adm_page.verify_element(AdminAuthPage.LOGIN_BUTTON)
     adm_page.verify_element(AdminAuthPage.LOGIN_FIELD)
     adm_page.verify_element(AdminAuthPage.PASSWORD_FIELD)
+    adm_page.check_browser_log()
 
 
 def test_category_page(browser):
@@ -42,7 +44,7 @@ def test_category_page(browser):
     category_page.verify_element(CategoryPage.LIST_VISUAL_TYPE)
     category_page.verify_element(CategoryPage.PRODUCT_PREVIEW)
     category_page.verify_element(CategoryPage.WISH_LIST_BUTTON)
-
+    category_page.check_browser_log()
 
 def test_search_result_page(browser):
     '''Проверяем элементы на странице с результатами поиска'''
@@ -55,7 +57,7 @@ def test_search_result_page(browser):
     search_page.verify_element(SearchResultPage.SEARCH_RESULT)
     search_page.verify_element(SearchResultPage.SHOW_DROPDOWN)
     search_page.verify_element(SearchResultPage.SORT_BY_DROPDOWN)
-
+    search_page.check_browser_log()
 
 def test_product_page(browser):
     '''Проверяем элементы страницы выбранного продукта'''
@@ -67,7 +69,7 @@ def test_product_page(browser):
     product_page.find_element(ProductPage.PRODUCT_DESCRIPTION)
     product_page.find_element(ProductPage.PRODUCT_IMG)
     product_page.find_element(ProductPage.PRODUCT_PRICE)
-
+    product_page.check_browser_log()
 
 def test_add_product(browser):
     '''Проверяем добавление нового продукта в каталог'''
@@ -79,16 +81,20 @@ def test_add_product(browser):
     admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
     admin_product_page.product_cart('new')
     admin_product_page.verify_product_in_table()
+    admin_product_page.check_browser_log()
 
-def test_add_product_with_img(browser):
-    '''Проверяем добавление нового продукта в каталог с изображением'''
-    admin_product_page = AdminProduct(browser)
-    admin_product_page.open_url('/admin')
-    admin_product_page.admin_auth()
-    admin_product_page.close_warning_message()
-    admin_product_page.click_element(AdminMainPageLocators.CATALOG_GROUP)
-    admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
-    admin_product_page.product_cart_with_img()
+# def test_add_product_with_img(browser):
+#     '''Проверяем добавление нового продукта в каталог с изображением'''
+#     admin_product_page = AdminProduct(browser)
+#     admin_product_page.open_url('/admin')
+#     admin_product_page.admin_auth()
+#     admin_product_page.close_warning_message()
+#     admin_product_page.click_element(AdminMainPageLocators.CATALOG_GROUP)
+#     admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
+#     admin_product_page.product_cart_with_img()
+#     admin_product_page.check_browser_log()
+
+
 def test_edit_product(browser):
     '''Проверяем редактирование продукта'''
     admin_product_page = AdminProduct(browser)
@@ -99,7 +105,7 @@ def test_edit_product(browser):
     admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
     admin_product_page.product_cart('edit')
     admin_product_page.verify_product_in_table()
-
+    admin_product_page.check_browser_log()
 
 def test_delete_product(browser):
     '''Проверяем удаление продукта'''
@@ -111,7 +117,7 @@ def test_delete_product(browser):
     admin_product_page.click_element(AdminMainPageLocators.PRODUCT_ELEMENT)
     admin_product_page.delete_product()
     admin_product_page.verify_delete_product_in_table()
-
+    admin_product_page.check_browser_log()
 
 def test_empty_message_in_basket(browser):
     '''Проверяем сообщение в пустой корзине'''
@@ -119,7 +125,7 @@ def test_empty_message_in_basket(browser):
     main_page.open_url()
     main_page.open_basket()
     main_page.verify_empety_basket()
-
+    main_page.check_browser_log()
 
 def test_delete_item_from_basket(browser):
     '''Проверяем удаление элемента из корзины'''
@@ -128,7 +134,7 @@ def test_delete_item_from_basket(browser):
     main_page.delete_item_from_basket()
     main_page.open_basket()
     main_page.verify_empety_basket()
-
+    main_page.check_browser_log()
 
 def test_add_product_to_basket(browser):
     '''Проверяем добавление элемента в корзину'''
@@ -137,7 +143,7 @@ def test_add_product_to_basket(browser):
     main_page.add_product_to_basket()
     main_page.open_basket()
     main_page.verify_basket_with_items()
-
+    main_page.check_browser_log()
 
 def test_registration(browser):
     '''Проверяем регистрацию нового пользователя'''
@@ -152,7 +158,7 @@ def test_registration(browser):
     user_cabinet = UserPersonalCabinetOpenCart(browser)
     user_cabinet.logout()
     user_cabinet.verify_logout()
-
+    user_cabinet.check_browser_log()
 
 def test_auth_user(browser):
     '''Проверяем авторизацию нового пользователя'''
@@ -166,3 +172,5 @@ def test_auth_user(browser):
     user_cabinet = UserPersonalCabinetOpenCart(browser)
     user_cabinet.logout()
     user_cabinet.verify_logout()
+    user_cabinet.check_browser_log()
+    user_cabinet.check_browser_log()
