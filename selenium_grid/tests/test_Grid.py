@@ -25,7 +25,6 @@ def test_category_page(browser):
     category_page.verify_element(CategoryPage.GRID_VISUAL_TYPE)
     category_page.verify_element(CategoryPage.LIST_VISUAL_TYPE)
     category_page.verify_element(CategoryPage.PRODUCT_PREVIEW)
-    category_page.verify_element(CategoryPage.WISH_LIST_BUTTON)
 
 
 def test_search_result_page(browser):

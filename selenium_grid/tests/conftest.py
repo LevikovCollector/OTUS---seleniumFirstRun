@@ -11,7 +11,8 @@ logging.basicConfig(level=logging.INFO, filename='test_log.log')
 def pytest_addoption(parser, ):
     parser.addoption('--browser', action='store', default='chrome')
     parser.addoption('--remote', action='store_true', default=True)
-    parser.addoption('--br_remote', action='store_true', default=True)
+    parser.addoption('--br_remote', action='store_true', default=False)
+    parser.addoption('--selenoid', action='store_true', default=True)
 
 @pytest.fixture(scope='session')
 def browser(request):
@@ -19,10 +20,23 @@ def browser(request):
     driver = None
     remote_flag = request.config.getoption('--remote')
     br_remote = request.config.getoption('--br_remote')
+    selenoid_flag = request.config.getoption('--selenoid')
     driver_logger = logging.getLogger('driver_log')
 
     if remote_flag:
-        if br_remote:
+        if selenoid_flag:
+            capabilities = {
+                "browserName": "opera",
+                "version": "65.0",
+                "enableVNC": True,
+                "enableVideo": False
+            }
+
+            driver = webdriver.Remote(
+                command_executor="http://192.168.1.72:4444/wd/hub/",
+                desired_capabilities=capabilities)
+
+        elif br_remote:
             desired_cap = {
                 'browser': 'Opera',
                 'browser_version': '12.16',
