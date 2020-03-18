@@ -18,4 +18,5 @@ class MainOpenCartPage(BasePage):
         self.click_element(MainPage.DELETE_ITEM_IN_BASKET)
 
     def open_basket(self):
-        self.click_element(MainPage.BASKET_BUTTON)
+        if self.find_element(MainPage.BASKET_BUTTON) is not None:
+            self.click_element(MainPage.BASKET_BUTTON)
