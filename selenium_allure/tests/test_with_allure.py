@@ -1,5 +1,5 @@
-from selenium_grid.locators import MainPage, CategoryPage, SearchResultPage, ProductPage
-from selenium_grid.page_obj.BaseClass import BasePage
+from selenium_allure.locators import MainPage, CategoryPage, SearchResultPage, ProductPage
+from selenium_allure.page_obj.BaseClass import BasePage
 import allure
 
 @allure.story('Главная станица')

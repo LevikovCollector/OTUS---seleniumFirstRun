@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 import allure
-import os
 
 
 def pytest_addoption(parser, ):
